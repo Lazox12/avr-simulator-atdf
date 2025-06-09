@@ -1,0 +1,6 @@
+[submodule "atdf2svd"]
+	path = atdf2svd
+	url = https://github.com/Rahix/atdf2svd.git
+[submodule "avr-registers"]
+	path = avr-registers
+	url = https://github.com/luqasz/avr-registers.git
