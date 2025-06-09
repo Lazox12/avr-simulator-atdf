@@ -3,6 +3,7 @@ from os.path import isfile, join
 import threading
 import sys
 import os
+import shutil
 import subprocess
 
 def run(path):
@@ -14,10 +15,10 @@ def getAtdf(path)-> list[str]:
     return [join(getcwd(),path,f) for f in listdir(path) if isfile(join(path,f))]
 
 def clean():
-    os.remove("svd")
+    shutil.rmtree("svd")
 
 if __name__ == "__main__":
-    if len(sys.argv)>2:
+    if len(sys.argv)>1:
         if sys.argv[1] == "clean":
             clean()
             exit(0)
@@ -25,8 +26,9 @@ if __name__ == "__main__":
     if not os.path.isdir("svd"):
         os.mkdir("svd")
     for i in getAtdf("avr-registers/atdf"):
-        threads.append(threading.Thread(target=run, args=(i,)))
-        i.start()
+        t = threading.Thread(target=run, args=(i,))
+        threads.append(t)
+        t.start()
 
     for i in threads:
         i.join()
