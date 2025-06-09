@@ -9,7 +9,7 @@ import subprocess
 def run(path):
     name = path.split("/")[-1].split(".")[0]
     print("generating:",name)
-    print(subprocess.run(["cargo","run","--manifest-path","atdf2svd/Cargo.toml","--",path,"svd/"+name],capture_output=True).stdout)
+    print(subprocess.run(["cargo","run","--manifest-path","atdf2svd/Cargo.toml","--",path,"svd/"+name+".svd"],capture_output=True).stdout)
 
 def getAtdf(path)-> list[str]:
     return [join(getcwd(),path,f) for f in listdir(path) if isfile(join(path,f))]
